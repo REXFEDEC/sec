@@ -2,10 +2,12 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Shield, Lock, Zap, FileText, Edit3, Cloud } from "lucide-react"
+import { LandingNav } from "@/components/landing-nav"
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-background">
+      <LandingNav />
       {/* Hero Section */}
       <section className="relative overflow-hidden py-20 sm:py-32">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

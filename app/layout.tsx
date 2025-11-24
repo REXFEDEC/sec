@@ -16,15 +16,15 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/icon-light-32x32.png",
+        url: "/favicon-light.svg",
         media: "(prefers-color-scheme: light)",
       },
       {
-        url: "/icon-dark-32x32.png",
+        url: "/favicon-dark.svg", 
         media: "(prefers-color-scheme: dark)",
       },
       {
-        url: "/icon.svg",
+        url: "/favicon-light.svg",
         type: "image/svg+xml",
       },
     ],
@@ -40,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`font-sans antialiased`}>
-        <ThemeProvider defaultTheme="dark" storageKey="secure-notes-theme">
+        <ThemeProvider defaultTheme="dark" storageKey="secure-notes-theme" attribute="class">
           {children}
           <Toaster />
         </ThemeProvider>
