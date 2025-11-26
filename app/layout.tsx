@@ -5,12 +5,13 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { Toaster } from "@/components/toaster"
 import { ThemeProvider } from "@/components/theme-provider"
+import { PasswordAuthProvider } from "@/hooks/use-password-auth"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Secure Notes App - Your Private Note-Taking Solution",
+  title: "Space Notes App - Your Private Note-Taking Solution",
   description: "Create, edit, and manage your notes with enterprise-grade security. Built with Next.js and Supabase.",
   generator: "v0.app",
   icons: {
@@ -40,10 +41,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`font-sans antialiased`}>
-        <ThemeProvider defaultTheme="dark" storageKey="secure-notes-theme" attribute="class">
-          {children}
-          <Toaster />
-        </ThemeProvider>
+        <PasswordAuthProvider>
+          <ThemeProvider defaultTheme="dark" storageKey="space-notes-theme" attribute="class">
+            {children}
+            <Toaster />
+          </ThemeProvider>
+        </PasswordAuthProvider>
         <Analytics />
       </body>
     </html>
