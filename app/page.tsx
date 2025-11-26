@@ -2,12 +2,10 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Shield, Lock, Zap, FileText, Edit3, Cloud, Rocket } from "lucide-react"
-import { PasswordProtection } from "@/components/password-protection"
 import { LandingNav } from "@/components/landing-nav"
 
 export default function Home() {
   return (
-    <PasswordProtection>
       <div className="min-h-screen bg-background">
         <LandingNav />
         {/* Hero Section */}
@@ -137,6 +135,5 @@ export default function Home() {
         </div>
       </footer>
       </div>
-    </PasswordProtection>
   )
 }

@@ -5,7 +5,6 @@ import { NotesList } from "@/components/notes-list"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Plus } from "lucide-react"
-import { PasswordProtection } from "@/components/password-protection"
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -27,7 +26,6 @@ export default async function DashboardPage() {
     .order("updated_at", { ascending: false })
 
   return (
-    <PasswordProtection>
       <div className="min-h-screen bg-background">
       <DashboardNav user={user} />
       <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
@@ -46,6 +44,5 @@ export default async function DashboardPage() {
         <NotesList notes={notes || []} />
       </main>
       </div>
-    </PasswordProtection>
   )
 }

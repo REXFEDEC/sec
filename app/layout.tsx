@@ -5,7 +5,6 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { Toaster } from "@/components/toaster"
 import { ThemeProvider } from "@/components/theme-provider"
-import { PasswordAuthProvider } from "@/hooks/use-password-auth"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
@@ -40,13 +39,29 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('space-notes-theme');
+                  if (theme) {
+                    document.documentElement.classList.add(theme);
+                  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.classList.add('dark');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className={`font-sans antialiased`}>
-        <PasswordAuthProvider>
-          <ThemeProvider defaultTheme="dark" storageKey="space-notes-theme" attribute="class">
-            {children}
-            <Toaster />
-          </ThemeProvider>
-        </PasswordAuthProvider>
+        <ThemeProvider defaultTheme="dark" storageKey="space-notes-theme" attribute="class">
+          {children}
+          <Toaster />
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>

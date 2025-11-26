@@ -6,6 +6,19 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Prevent flash of incorrect theme */
+html {
+  color-scheme: light dark;
+}
+
+/* Theme loading prevention */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -131,11 +144,23 @@ html {
   }
 }
 
-/* <CHANGE> Add smooth transitions for theme switching */
+/* Smooth transitions for theme switching */
 * {
-  transition-property: background-color, border-color, color, fill, stroke;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 200ms;
+  transition-duration: 150ms;
+}
+
+/* Prevent layout shift during theme change */
+.theme-transition * {
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+              color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+              fill 150ms cubic-bezier(0.4, 0, 0.2, 1),
+              stroke 150ms cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 150ms cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1),
+              transform 150ms cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 /* <CHANGE> Add custom scrollbar styles */
