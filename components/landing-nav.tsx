@@ -50,22 +50,22 @@ export function LandingNav() {
         {/* Mobile Menu */}
         <div
           className={cn(
-            "absolute left-0 right-0 top-16 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b md:hidden transition-all duration-300 ease-in-out",
+            "absolute left-0 right-0 top-16 bg-background/90 backdrop-blur-lg supports-[backdrop-filter]:bg-background/80 border-b border-border/50 shadow-lg md:hidden transition-all duration-300 ease-in-out",
             mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"
           )}
         >
           <div className="px-4 py-6 space-y-4">
-            <Button asChild variant="ghost" size="sm" className="w-full justify-start h-11">
+            <Button asChild variant="ghost" size="sm" className="w-full justify-start h-11 hover:bg-accent/50">
               <Link href="#features" onClick={() => setMobileMenuOpen(false)}>
                 Features
               </Link>
             </Button>
-            <Button asChild variant="ghost" size="sm" className="w-full justify-start h-11">
+            <Button asChild variant="ghost" size="sm" className="w-full justify-start h-11 hover:bg-accent/50">
               <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
                 Sign In
               </Link>
             </Button>
-            <Button asChild size="sm" className="w-full h-11">
+            <Button asChild size="sm" className="w-full h-11 bg-primary/90 hover:bg-primary text-primary-foreground">
               <Link href="/register" onClick={() => setMobileMenuOpen(false)}>
                 Get Started
               </Link>

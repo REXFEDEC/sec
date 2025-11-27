@@ -92,15 +92,6 @@ export function DashboardNav({ user }: DashboardNavProps) {
                   </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="cursor-pointer">
-                  <User className="mr-2 h-4 w-4" />
-                  Profile
-                </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer">
-                  <Settings className="mr-2 h-4 w-4" />
-                  Settings
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-red-600 focus:text-red-600">
                   <LogOut className="mr-2 h-4 w-4" />
                   Sign out
@@ -122,7 +113,7 @@ export function DashboardNav({ user }: DashboardNavProps) {
         {/* Mobile Menu */}
         <div
           className={cn(
-            "absolute left-0 right-0 top-16 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b md:hidden transition-all duration-300 ease-in-out",
+            "absolute left-0 right-0 top-16 bg-background/90 backdrop-blur-lg supports-[backdrop-filter]:bg-background/80 border-b border-border/50 shadow-lg md:hidden transition-all duration-300 ease-in-out",
             mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"
           )}
         >
@@ -143,30 +134,18 @@ export function DashboardNav({ user }: DashboardNavProps) {
             <DropdownMenuSeparator className="bg-border" />
             
             {/* Menu Items */}
-            <Button asChild variant="ghost" size="sm" className="w-full justify-start h-11">
+            <Button asChild variant="ghost" size="sm" className="w-full justify-start h-11 hover:bg-accent/50">
               <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)}>
                 <FileText className="mr-2 h-4 w-4" />
                 Dashboard
               </Link>
             </Button>
             
-            <Button asChild variant="ghost" size="sm" className="w-full justify-start h-11">
+            <Button asChild variant="ghost" size="sm" className="w-full justify-start h-11 hover:bg-accent/50">
               <Link href="/notes/new" onClick={() => setMobileMenuOpen(false)}>
                 <FileText className="mr-2 h-4 w-4" />
                 New Note
               </Link>
-            </Button>
-            
-            <DropdownMenuSeparator className="bg-border" />
-            
-            <Button variant="ghost" size="sm" className="w-full justify-start h-11">
-              <User className="mr-2 h-4 w-4" />
-              Profile
-            </Button>
-            
-            <Button variant="ghost" size="sm" className="w-full justify-start h-11">
-              <Settings className="mr-2 h-4 w-4" />
-              Settings
             </Button>
             
             <DropdownMenuSeparator className="bg-border" />
