@@ -113,13 +113,13 @@ export function DashboardNav({ user }: DashboardNavProps) {
         {/* Mobile Menu */}
         <div
           className={cn(
-            "absolute left-0 right-0 top-16 bg-background/90 backdrop-blur-lg supports-[backdrop-filter]:bg-background/80 border-b border-border/50 shadow-lg md:hidden transition-all duration-300 ease-in-out",
-            mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"
+            "absolute left-0 right-0 top-16 bg-background border-b border-border shadow-xl md:hidden transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] transform-gpu",
+            mobileMenuOpen ? "opacity-100 translate-y-0 scale-100" : "opacity-0 -translate-y-4 scale-95 pointer-events-none"
           )}
         >
           <div className="px-4 py-6 space-y-4">
             {/* User Info */}
-            <div className="flex items-center gap-3 px-2 py-2">
+            <div className="flex items-center gap-3 px-2 py-2 transition-all duration-300 delay-100 transform-gpu">
               <Avatar className="h-10 w-10">
                 <AvatarFallback className="text-sm font-medium">
                   {getInitials(user.email)}
@@ -134,31 +134,33 @@ export function DashboardNav({ user }: DashboardNavProps) {
             <DropdownMenuSeparator className="bg-border" />
             
             {/* Menu Items */}
-            <Button asChild variant="ghost" size="sm" className="w-full justify-start h-11 hover:bg-accent/50">
-              <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)}>
-                <FileText className="mr-2 h-4 w-4" />
-                Dashboard
-              </Link>
-            </Button>
-            
-            <Button asChild variant="ghost" size="sm" className="w-full justify-start h-11 hover:bg-accent/50">
-              <Link href="/notes/new" onClick={() => setMobileMenuOpen(false)}>
-                <FileText className="mr-2 h-4 w-4" />
-                New Note
-              </Link>
-            </Button>
-            
-            <DropdownMenuSeparator className="bg-border" />
-            
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              className="w-full justify-start h-11 text-red-600 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20"
-              onClick={handleSignOut}
-            >
-              <LogOut className="mr-2 h-4 w-4" />
-              Sign out
-            </Button>
+            <div className="space-y-2">
+              <Button asChild variant="ghost" size="sm" className="w-full justify-start h-11 hover:bg-accent/50 transition-all duration-300 delay-150 transform-gpu">
+                <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)}>
+                  <FileText className="mr-2 h-4 w-4" />
+                  Dashboard
+                </Link>
+              </Button>
+              
+              <Button asChild variant="ghost" size="sm" className="w-full justify-start h-11 hover:bg-accent/50 transition-all duration-300 delay-200 transform-gpu">
+                <Link href="/notes/new" onClick={() => setMobileMenuOpen(false)}>
+                  <FileText className="mr-2 h-4 w-4" />
+                  New Note
+                </Link>
+              </Button>
+              
+              <DropdownMenuSeparator className="bg-border" />
+              
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="w-full justify-start h-11 text-red-600 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20 transition-all duration-300 delay-250 transform-gpu"
+                onClick={handleSignOut}
+              >
+                <LogOut className="mr-2 h-4 w-4" />
+                Sign out
+              </Button>
+            </div>
           </div>
         </div>
       </div>
