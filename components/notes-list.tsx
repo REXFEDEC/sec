@@ -26,6 +26,10 @@ import { createClient } from "@/lib/supabase/client"
 import { useRouter } from "next/navigation"
 import { useToast } from "@/hooks/use-toast"
 import { useState, useEffect } from "react"
+import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism"
 
 interface Note {
   id: string
@@ -206,21 +210,56 @@ export function NotesList({ notes }: NotesListProps) {
           </CardHeader>
           <CardContent className="pt-0">
             <div className="prose prose-sm dark:prose-invert max-w-none">
-              <div className="text-sm leading-relaxed text-muted-foreground line-clamp-4">
+              <div className="text-sm leading-relaxed text-muted-foreground max-h-32 overflow-hidden relative">
                 {note.content ? (
-                  <div 
-                    dangerouslySetInnerHTML={{ 
-                      __html: note.content.length > 300 
-                        ? note.content.substring(0, 300) + '...' 
-                        : note.content 
-                    }} 
-                  />
+                  <div className="markdown-preview">
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      components={{
+                        code({ node, className, children, ...props }: any) {
+                          const match = /language-(\w+)/.exec(className || '')
+                          const isInline = !match
+                          return isInline ? (
+                            <code className={`${className} px-1 py-0.5 rounded bg-muted text-muted-foreground text-xs`} {...props}>
+                              {children}
+                            </code>
+                          ) : (
+                            <SyntaxHighlighter
+                              style={oneDark}
+                              language={match[1]}
+                              PreTag="div"
+                              className="rounded-md text-xs"
+                              {...props}
+                            >
+                              {String(children).replace(/\n$/, '')}
+                            </SyntaxHighlighter>
+                          )
+                        },
+                        h1: ({ children }) => <h1 className="text-lg font-semibold mb-2 text-foreground">{children}</h1>,
+                        h2: ({ children }) => <h2 className="text-base font-semibold mb-2 text-foreground">{children}</h2>,
+                        h3: ({ children }) => <h3 className="text-sm font-semibold mb-1 text-foreground">{children}</h3>,
+                        p: ({ children }) => <p className="mb-2 text-foreground">{children}</p>,
+                        ul: ({ children }) => <ul className="list-disc list-inside mb-2 ml-2 text-foreground">{children}</ul>,
+                        ol: ({ children }) => <ol className="list-decimal list-inside mb-2 ml-2 text-foreground">{children}</ol>,
+                        li: ({ children }) => <li className="mb-1 text-foreground">{children}</li>,
+                        blockquote: ({ children }) => (
+                          <blockquote className="border-l-4 border-border pl-4 italic text-muted-foreground mb-2">
+                            {children}
+                          </blockquote>
+                        ),
+                      }}
+                    >
+                      {note.content.length > 500 
+                        ? note.content.substring(0, 500) + '...' 
+                        : note.content}
+                    </ReactMarkdown>
+                  </div>
                 ) : (
-                  <span className="italic">No content available</span>
+                  <span className="italic text-muted-foreground">No content available</span>
                 )}
               </div>
             </div>
-            {note.content && note.content.length > 300 && (
+            {note.content && note.content.length > 500 && (
               <Button 
                 asChild 
                 variant="ghost" 
